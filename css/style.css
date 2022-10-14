@@ -153,11 +153,7 @@ i.fa-star {
   font-size: 15px;
   margin-bottom: 3px;
 }
-.app_result-score {
-}
 
-.app_result-count {
-}
 .app_result-name {
   font-size: 18px;
   margin-left: auto;
@@ -167,10 +163,7 @@ i.fa-star {
   font-size: 18px;
   margin-bottom: 2px;
 }
-.app_body-bottom {
-}
-.app_btn {
-}
+
 .btn_back {
   width: 70px;
   height: 70px;
@@ -180,4 +173,15 @@ i.fa-star {
 .btn_achievment {
   background-color: rgb(0, 0, 0, 0.5);
   border: 5px solid rgb(1, 88, 154, 0.5);
+}
+.app_header-inner {
+  color: #fff;
+  text-align: center;
+}
+.app_count {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.app_text {
+  font-size: 18px;
 }

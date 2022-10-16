@@ -11,10 +11,8 @@
     <title>Моя расса в StarCraft 2</title>
   </head>
   <body>
-    <script src="js/vue.js"></script>
-    <script src="js/const.js"></script>
     <div class="main">
-      <!-- <div class="app">
+      <div class="app" v-show="showMain">
         <div class="app_header">
           <img src="img/logo.png" class="app_logo" />
         </div>
@@ -36,9 +34,9 @@
             <div class="btn_text">Звук</div>
           </button>
         </div>
-      </div> -->
+      </div>
 
-      <!-- <div class="app achievments">
+      <div class="app achievments" v-show="showAchievments">
         <div class="app_body">
           <div class="app_body-inner">
             <h2 class="app_body-title">
@@ -80,9 +78,9 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
 
-      <!-- <div class="app">
+      <div class="app" v-show="showQuestions">
         <div class="app_header">
           <div class="app_header-inner">
             <div class="app_count">#1</div>
@@ -94,9 +92,9 @@
             <div class="app_btn-text">Ответ 1</div>
           </div>
         </div>
-      </div> -->
+      </div>
 
-      <!-- <div class="app">
+      <div class="app" v-show="showSocial">
         <div class="app_body">
           <a target="_blank" href="" class="app_btn">
             <i class="fa fa-github" aria-hidden="true"></i>
@@ -122,9 +120,9 @@
             <i class="fa fa-reply" aria-hidden="true"></i>
           </button>
         </div>
-      </div> -->
+      </div>
 
-      <div class="app results" data-race="protoss">
+      <div class="app results" data-race="protoss" v-show="showResult">
         <div class="app_body">
           <div class="app_results-inner">
             <div class="results_title">Зерг</div>
@@ -149,5 +147,45 @@
         </div>
       </div>
     </div>
+
+    <script src="js/vue.js"></script>
+    <script src="js/const.js"></script>
+    <script>
+      let app = new Vue({
+        el: ".main",
+        data: {
+          showMain: true,
+          showSocial: false,
+          showAchievments: false,
+          showQuestions: false,
+          showResult: false,
+          number: 0,
+          score: {
+            zerg: 0,
+            primal: 0,
+            protoss: 0,
+            taldarin: 0,
+            terran: 0,
+          },
+          totalGame: localStorage.getItem("sc2TotalGame")
+            ? JSON.parse(localStorage.getItem("sc2TotalGame"))
+            : {
+                zerg: 0,
+                primal: 0,
+                protoss: 0,
+                taldarin: 0,
+                terran: 0,
+                infested: 0,
+                hybrid: 0,
+              },
+          totalGames: localStorage.getItem("sc2TotalGames")
+            ? localStorage.getItem("sc2TotalGames")
+            : 0,
+          questions: questions,
+          results: results,
+          resultRace: "infested",
+        },
+      });
+    </script>
   </body>
 </html>

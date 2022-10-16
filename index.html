@@ -17,15 +17,15 @@
           <img src="img/logo.png" class="app_logo" />
         </div>
         <div class="app_body">
-          <button class="app_btn">
+          <button class="app_btn" @click="goToQuestions">
             <i class="fa fa-address-book" aria-hidden="true"></i>
             <div class="btn_text">Начать</div>
           </button>
-          <button class="app_btn">
+          <button class="app_btn" @click="goToAchievments">
             <i class="fa fa-trophy" aria-hidden="true"></i>
             <div class="btn_text">Достижения</div>
           </button>
-          <button class="app_btn">
+          <button class="app_btn" @click="goToSocial">
             <i class="fa fa-user" aria-hidden="true"></i>
             <div class="btn_text">Автор</div>
           </button>
@@ -116,7 +116,7 @@
             <i class="fa fa-vk" aria-hidden="true"></i>
             <div class="app_btn-text">Vkontakte</div>
           </a>
-          <button class="app_btn btn_back">
+          <button class="app_btn btn_back" @click="goToMain">
             <i class="fa fa-reply" aria-hidden="true"></i>
           </button>
         </div>
@@ -184,6 +184,61 @@
           questions: questions,
           results: results,
           resultRace: "infested",
+        },
+        methods: {
+          goToMain() {
+            this.showMain = true;
+            this.showSocial = false;
+            this.showAchievments = false;
+            this.showQuestions = false;
+            this.showResult = false;
+          },
+
+          goToSocial() {
+            this.showMain = false;
+            this.showSocial = true;
+            this.showAchievments = false;
+            this.showQuestions = false;
+            this.showResult = false;
+          },
+
+          goToAchievments() {
+            if (this.totalGames > 0) {
+              this.showMain = false;
+              this.showSocial = false;
+              this.showAchievments = true;
+              this.showQuestions = false;
+              this.showResult = false;
+            } else {
+              this.goToQuestions();
+            }
+          },
+
+          goToQuestions() {
+            this.score = {
+              zerg: 0,
+              primal: 0,
+              protoss: 0,
+              taldarin: 0,
+              terran: 0,
+              infested: 0,
+              hybrid: 0,
+            };
+            this.showMain = false;
+            this.showSocial = false;
+            this.showAchievments = false;
+            this.showQuestions = true;
+            this.showResult = false;
+          },
+
+          goToResults(race) {
+            this.showMain = false;
+            this.showSocial = false;
+            this.showAchievments = false;
+            this.showQuestions = false;
+            this.showResult = true;
+            this.resultRace = race;
+          },
         },
       });
     </script>

@@ -88,8 +88,12 @@
           </div>
         </div>
         <div class="app_body">
-          <div class="app_btn">
-            <div class="app_btn-text">Ответ 1</div>
+          <div
+            class="app_btn"
+            v-for="(answer, i) in questions[number][1]"
+            @click="nextQuestion(questions[number][2][i])"
+          >
+            <div class="app_btn-text">{{answer}}</div>
           </div>
         </div>
       </div>
@@ -238,6 +242,15 @@
             this.showQuestions = false;
             this.showResult = true;
             this.resultRace = race;
+          },
+          nextQuestion(answer) {
+            if (this.number == 24) {
+              this.number = 0;
+              // this.endGame();
+            } else {
+              this.number++;
+            }
+            eval(answer);
           },
         },
       });

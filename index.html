@@ -83,8 +83,8 @@
       <div class="app" v-show="showQuestions">
         <div class="app_header">
           <div class="app_header-inner">
-            <div class="app_count">#1</div>
-            <div class="app_text">Текст вопроса</div>
+            <div class="app_count"># {{number+1}}</div>
+            <div class="app_text">{{questions[number][0]}}</div>
           </div>
         </div>
         <div class="app_body">

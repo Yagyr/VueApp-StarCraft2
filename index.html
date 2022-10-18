@@ -126,24 +126,24 @@
         </div>
       </div>
 
-      <div class="app results" data-race="protoss" v-show="showResult">
+      <div class="app results" :data-race="resultRace" v-show="showResult">
         <div class="app_body">
           <div class="app_results-inner">
-            <div class="results_title">Зерг</div>
+            <div class="results_title">{{results[resultRace].name}}</div>
             <div class="results_img">
-              <img src="img/protoss_logo.png" />
+              <img :src="'img/'+resultRace+'_logo.png'" />
             </div>
             <div class="results_text-box">
-              <p class="results_text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea,
-                eius.
-              </p>
-              <p class="results_quote">Цитата1</p>
-              <p class="results_quote">Цитата2</p>
-              <p class="results_author">Автор</p>
+              <p class="results_text">{{results[resultRace].description}}</p>
+              <p class="results_quote">{{results[resultRace].quote1}}</p>
+              <p class="results_quote">{{results[resultRace].quote2}}</p>
+              <p class="results_author">{{results[resultRace].author}}</p>
             </div>
             <div>
-              <button class="app_btn btn_back btn_protoss">
+              <button
+                :class="'app_btn btn_back btn_'+resultRace"
+                @click="goToAchievments"
+              >
                 <i class="fa fa-reply" aria-hidden="true"></i>
               </button>
             </div>
@@ -168,7 +168,7 @@
             zerg: 0,
             primal: 0,
             protoss: 0,
-            taldarin: 0,
+            taldarim: 0,
             terran: 0,
           },
           totalGame: localStorage.getItem("sc2TotalGame")
@@ -177,7 +177,7 @@
                 zerg: 0,
                 primal: 0,
                 protoss: 0,
-                taldarin: 0,
+                taldarim: 0,
                 terran: 0,
                 infested: 0,
                 hybrid: 0,
@@ -223,7 +223,7 @@
               zerg: 0,
               primal: 0,
               protoss: 0,
-              taldarin: 0,
+              taldarim: 0,
               terran: 0,
               infested: 0,
               hybrid: 0,
@@ -246,11 +246,54 @@
           nextQuestion(answer) {
             if (this.number == 24) {
               this.number = 0;
-              // this.endGame();
+              this.endGame();
             } else {
               this.number++;
             }
             eval(answer);
+          },
+          endGame() {
+            this.totalGames++;
+            localStorage.setItem("sc2TotalGames", this.totalGames);
+            if (
+              this.score.zerg > this.score.protoss &&
+              this.score.zerg > this.score.terran &&
+              this.score.primal < 8 &&
+              Math.abs(this.score.protoss - this.score.zerg) > 3
+            ) {
+              this.goToResults("zerg");
+              this.totalGame.zerg++;
+            } else if (
+              this.score.primal > this.score.protoss &&
+              this.score.primal > this.score.terran &&
+              this.score.primal == 8
+            ) {
+              this.goToResults("primal");
+              this.totalGame.primal++;
+            } else if (
+              this.score.protoss > this.score.zerg &&
+              this.score.protoss > this.score.terran &&
+              this.score.taldarim == 5
+            ) {
+              this.goToResults("taldarim");
+              this.totalGame.taldarim++;
+            } else if (
+              this.score.terran > this.score.zerg &&
+              this.score.terran > this.score.protoss
+            ) {
+              this.goToResults("terran");
+              this.totalGame.terran++;
+            } else if (Math.abs(this.score.protoss - this.score.zerg) <= 3) {
+              this.goToResults("hybrid");
+              this.totalGame.hybrid++;
+            } else {
+              this.goToResults("infested");
+              this.totalGame.infested++;
+            }
+            localStorage.setItem(
+              "sc2totalgame",
+              JSON.stringify(this.totalGame)
+            );
           },
         },
       });

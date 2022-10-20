@@ -75,11 +75,15 @@ i.fa {
   line-height: 20px;
   color: #fff;
   text-transform: uppercase;
+  cursor: default;
+  transition: background 0.3s ease;
 }
 .app_btn:focus {
   outline: none;
 }
-
+.app_btn:hover {
+  background-color: #054886;
+}
 .achievments .app_body {
   justify-content: flex-start;
 }

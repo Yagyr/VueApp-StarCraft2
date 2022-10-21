@@ -76,13 +76,12 @@ i.fa {
   color: #fff;
   text-transform: uppercase;
   cursor: default;
-  transition: background 0.3s ease;
 }
 .app_btn:focus {
   outline: none;
 }
-.app_btn:hover {
-  background-color: #054886;
+.app_btn:active {
+  background-color: #002e52;
 }
 .achievments .app_body {
   justify-content: flex-start;
@@ -148,6 +147,7 @@ i.fa {
   padding: 5px 10px;
   border: 5px solid rgb(1, 88, 154, 0.5);
   background-color: rgba(25, 121, 211, 0.8);
+  margin-bottom: 7px;
 }
 .app_result-count {
   margin-bottom: 0;
